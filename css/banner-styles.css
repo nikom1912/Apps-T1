@@ -1,0 +1,46 @@
+body{
+    margin: 0;
+}
+.logo{
+    width: 180px;
+    padding-left: 30px;
+    padding-top: 20px;
+}
+.nav-button{
+    display: none;
+}
+.barra{
+    background: orange;
+    display: flex;
+    width: 100%;
+    padding: 20px;
+    justify-content: space-around; 
+}
+.nav-enlace{
+    display: flex;
+    text-align: center;
+    margin: 30px;
+    width: 25%;
+    height: auto;
+    padding: auto 0;
+    color: white;
+    font-size: 35px;
+    font-weight: bold;
+    text-decoration: none;
+
+    justify-content: center;
+    flex-direction: column;
+}
+.abajo{
+    font-weight: 500;
+}
+.logo-banner{
+    display: flex;
+    width: 19%;
+}
+.option-banner{
+    width: 95%;
+    margin-right: 30px;
+    display: flex;
+    justify-content: space-around; 
+}

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Añadir Traslado | Tarea 1</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+    <script src="js/regiones.js"></script>
+    <script src="js/val-traslados.js"></script>
+
+    <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+    <link rel="stylesheet" href="css/addt-styles.css">
+    <link rel="stylesheet" href="css/banner-styles.css">
+    
+    
+    
+</head>
+<body>
+    <div class="container">
+        <section class="banner">
+            <header>
+                <div class="content">
+                    <div class="barra">
+                        <div class="logo-banner">
+                            <a href="index.html">
+                                    <img class="logo" src="img/banner-real.png"alt="banner">
+                            </a>
+                        </div>
+                        <div class="option-banner">
+                            <button class="nav-button"> <img class="menu-icon"src="img/menu.png" alt="menu-icon"></button>
+                            <a href="addtraslado.html"  class="nav-enlace desaparece">Agregar Traslado</a>
+                            <a href="#"  class="nav-enlace desaparece">Agregar Voluntarios </a>
+                            <a href="#"  class="nav-enlace desaparece">Ver Traslados  </a>
+                            <a href="#"  class="nav-enlace desaparece">VerVoluntarios  </a>
+                        </div>
+                    </div>
+                
+                </div>
+            </header>
+        </section>
+        <section class="main">
+            <h1>Agregar traslado</h1>
+                <form method="post" onsubmit="return validarRyC() && validacion()">
+                    <table>
+                        <tbody>
+                            <tr>
+                                <th>Region de origen</th>
+                            </tr>
+                            <tr>
+                                <td><select id="regiones"></select></td>
+                            </tr>
+                            <tr>
+                                <th>Comuna de origen</th>
+                            </tr>
+                            <tr>
+                                <td><select id="comunas"></select></td>
+                            </tr>
+                            <tr><th>Region de Destino</th></tr>
+                            <tr> <td><select id="regiones2"></select></tr>
+                            <tr><th>Comuna destino</th></tr>
+                            <tr><td><select id="comunas2"></select></td></tr>
+                            <tr><th>Fecha de viaje</th></tr>
+                            <tr><td><input type="date" name="fecha-viaje" id="fecha-viaje"></td></tr>
+                            <tr><th>Escpacio necesario</th></tr>
+                            <tr><td><select name="espacio-necesario" id="esp-necesario">
+                                <option value="30x30x30">30x30x30</option>
+                                <option value="50x50x50">50x50x50</option>
+                                <option value="100x100x100">100x100x100</option>
+                            </select></td></tr>
+                            <tr><th>Tipo de mascota</th></tr>
+                            <tr><td><select name="ti -po-mascota" id="tipo-mascota">
+                                <option value="gato">gato</option>
+                                <option value="perro">perro</option>
+                                <option value="conejo">conejo</option>
+                                <option value="hamster">hamster</option>
+                                <option value="tortuga">tortuga</option>
+                                <option value="otro">otro</option>
+                            </select>
+                            </td></tr>
+                            <tr><th>Foto mascota</th></tr>
+                            <!-- agregar inpt fotos -->
+                            <tr><th>Descripcion mascota</th></tr>
+                            <tr><td><textarea name="descripcion-mascota" id="descripcion" rows="8" cols="40" maxlength="500"> </textarea></td></tr>
+
+                            <tr><th>Nombre contacto</th></tr>
+                            <tr><td><input type="text" maxlength="80" size="30" name="nombre"></td></tr>
+                            <tr><th>Email contacto</th></tr>
+                            <tr><td><input type="email" name="email" id="email"></td></tr>
+                            <tr><th>Número celular contacto</th></tr>
+                            <tr><td><input type="number" name="celular" id="celular"></td></tr>
+                            <tr><td><input type="submit"></td></tr>
+                        </tbody>
+                    </table>
+                </form>
+        </section>
+    </div>
+</body>
+</html>
