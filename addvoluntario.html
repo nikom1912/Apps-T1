@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Añadir Traslado | Tarea 1</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" ></script>
+    <script src="js/regiones2.js"></script>
+    <script src="js/val-voluntarios.js"></script>
+    <script src="js/script-aaddt.js"></script>
+
+    <link type="text/css" href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="css/addt-styles.css">
+    <link type="text/css" rel="stylesheet" href="css/banner-styles.css">
+    
+    
+    
+</head>
+<body>
+    <div class="container">
+        <div class="banner">
+            <header>
+                <div class="content">
+                    <div class="barra">
+                        <div class="logo-banner">
+                            <a href="index.html">
+                                    <img class="logo" src="img/banner-real.png" alt="banner">
+                            </a>
+                        </div>
+                        <div class="option-banner">
+                            <button class="nav-button"> <img class="menu-icon" src="img/menu.png" alt="menu-icon"></button>
+                            <a href="addtraslado.html"  class="nav-enlace desaparece">Agregar Traslado</a>
+                            <a href="addv"  class="nav-enlace desaparece">Agregar Voluntarios </a>
+                            <a href="vertraslados.html"  class="nav-enlace desaparece">Ver Traslados  </a>
+                            <a href="vervoluntarios.html"  class="nav-enlace desaparece">Ver Voluntarios  </a>
+                        </div>
+                    </div>
+                
+                </div>
+            </header>
+        </div>
+        <div class="main">
+            <h1>Agregar traslado</h1>
+            <div class="caja">
+                <form method="post" onsubmit="return validarRyC2() && validacion()">
+                    <table>
+                        <tbody>
+                                <tr><th>Nombre voluntario</th></tr>
+                                <tr><td><input type="text" maxlength="80" size="30" name="nombre-voluntario" id="nombre"></td></tr>
+                                <tr><th>Email voluntario</th></tr>
+                                <tr><td><input type="email" name="email-voluntario" id="email"></td></tr>
+                                <tr><th>Número celular voluntario</th></tr>
+                                <tr><td><input type="number" name="celular-voluntario" id="celular"> Ej: 912345678</td></tr>
+                                
+                            
+    
+                            <tr><th>Escpacio disponible</th></tr>
+                            <tr><td>
+                                <select name="espacio-disponible" id="esp-necesario" onchange="mostrar(this, 'mas', 'input-espacio')">
+                                <option value="30x30x30">30x30x30</option>
+                                <option value="50x50x50">50x50x50</option>
+                                <option value="100x100x100">100x100x100</option>
+                                <option value="mas">mas</option>
+                                
+                                </select> <input type="text" size="15" id="input-espacio"></td></tr>
+                            <tr>
+                                <th>Region disponible</th>
+                            </tr>
+                            <tr>
+                                <td><select name="region-disponible" id="regiones1"></select></td>
+                            </tr>
+                            <tr>
+                                <th>Comuna disponible</th>
+                            </tr>
+                            <tr>
+                                <td><select name="comuna-disponible" id="comunas1"></select></td>
+                            </tr>
+                            <tr class="c">
+                            </tr>
+                        
+                        <tr><td><button type="button" onclick="annadirComuna(), act()">agregar otra comuna</button></td></tr>
+
+                        
+                            
+                            <!-- agregar inpt fotos -->
+                            
+
+                            
+                            <tr><th>Descripcion</th></tr>
+                            <tr><td><textarea name="descripcion-voluntario" id="descripcion" rows="8" cols="40" maxlength="500"> </textarea></td></tr>
+                            <tr><td><input type="submit"> </td> </tr>
+                        </tbody>
+                    </table>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

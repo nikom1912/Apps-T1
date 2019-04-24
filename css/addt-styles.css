@@ -2,7 +2,7 @@
     background: rgb(102, 136, 158);
     display: block;
     margin: 0 auto;
-    width: 600px;
+    width: 800px;
     
 }
 h1{
@@ -25,6 +25,11 @@ th{
 
 }
 #input-mascota{
+    display: none;
+    margin-left: 5px;
+    
+}
+#input-espacio{
     display: none;
     margin-left: 5px;
     

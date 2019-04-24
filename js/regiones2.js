@@ -61,6 +61,51 @@ var RegionesYcomunas = {
 			"comunas": ["Cerrillos", "Cerro Navia", "Conchalí", "El Bosque", "Estación Central", "Huechuraba", "Independencia", "La Cisterna", "La Florida", "La Granja", "La Pintana", "La Reina", "Las Condes", "Lo Barnechea", "Lo Espejo", "Lo Prado", "Macul", "Maipú", "Ñuñoa", "Pedro Aguirre Cerda", "Peñalolén", "Providencia", "Pudahuel", "Quilicura", "Quinta Normal", "Recoleta", "Renca", "San Joaquín", "San Miguel", "San Ramón", "Vitacura", "Puente Alto", "Pirque", "San José de Maipo", "Colina", "Lampa", "TilVl", "San Bernardo", "Buin", "Calera de Tango", "Paine", "Melipilla", "Alhué", "Curacaví", "María Pinto", "San Pedro", "Talagante", "El Monte", "Isla de Maipo", "Padre Hurtado", "Peñaflor"]
 	}]
 }
+function init(idR, idC){
+    jQuery(document).ready(function () {
+        var iRegion = 0;
+        var htmlRegion = '<option value="sin-region">Seleccione región</option><option value="sin-region">--</option>';
+        var htmlComunas = '<option value="sin-region">Seleccione comuna</option><option value="sin-region">--</option>';
+
+        jQuery.each(RegionesYcomunas.regiones, function () {
+            htmlRegion = htmlRegion + '<option value="' + RegionesYcomunas.regiones[iRegion].NombreRegion + '">' + RegionesYcomunas.regiones[iRegion].NombreRegion + '</option>';
+            iRegion++;
+        });
+
+        jQuery('#' + idR).html(htmlRegion);
+        jQuery('#' + idC).html(htmlComunas);
+
+        jQuery('#' + idR).change(function () {
+            var iRegiones = 0;
+            var valorRegion = jQuery(this).val();
+            var htmlComuna = '<option value="sin-comuna">Seleccione comuna</option><option value="sin-comuna">--</option>';
+            jQuery.each(RegionesYcomunas.regiones, function () {
+                if (RegionesYcomunas.regiones[iRegiones].NombreRegion == valorRegion) {
+                    var iComunas = 0;
+                    jQuery.each(RegionesYcomunas.regiones[iRegiones].comunas, function () {
+                        htmlComuna = htmlComuna + '<option value="' + RegionesYcomunas.regiones[iRegiones].comunas[iComunas] + '">' + RegionesYcomunas.regiones[iRegiones].comunas[iComunas] + '</option>';
+                        iComunas++;
+                    });
+                }
+                iRegiones++;
+            });
+            jQuery('#' + idC).html(htmlComuna);
+        });
+        jQuery('#' + idC).change(function () {
+            if (jQuery(this).val() == 'sin-region') {
+                alert('selecciones Región');
+            } else if (jQuery(this).val() == 'sin-comuna') {
+                alert('selecciones Comuna');
+            }
+        });
+        jQuery('#' + idR).change(function () {
+            if (jQuery(this).val() == 'sin-region') {
+                alert('selecciones Región');
+            }
+        });
+
+    });
+}
 jQuery(document).ready(function () {
 	var iRegion = 0;
 	var htmlRegion = '<option value="sin-region">Seleccione región</option><option value="sin-region">--</option>';
@@ -71,10 +116,10 @@ jQuery(document).ready(function () {
 		iRegion++;
 	});
 
-	jQuery('#regiones').html(htmlRegion);
-	jQuery('#comunas').html(htmlComunas);
+	jQuery('#regiones1').html(htmlRegion);
+	jQuery('#comunas1').html(htmlComunas);
 
-	jQuery('#regiones').change(function () {
+	jQuery('#regiones1').change(function () {
 		var iRegiones = 0;
 		var valorRegion = jQuery(this).val();
 		var htmlComuna = '<option value="sin-comuna">Seleccione comuna</option><option value="sin-comuna">--</option>';
@@ -88,59 +133,16 @@ jQuery(document).ready(function () {
 			}
 			iRegiones++;
 		});
-		jQuery('#comunas').html(htmlComuna);
+		jQuery('#comunas1').html(htmlComuna);
 	});
-	jQuery('#comunas').change(function () {
+	jQuery('#comunas1').change(function () {
 		if (jQuery(this).val() == 'sin-region') {
 			alert('selecciones Región');
 		} else if (jQuery(this).val() == 'sin-comuna') {
 			alert('selecciones Comuna');
 		}
 	});
-	jQuery('#regiones').change(function () {
-		if (jQuery(this).val() == 'sin-region') {
-			alert('selecciones Región');
-		}
-	});
-
-});
-jQuery(document).ready(function () {
-	var iRegion = 0;
-	var htmlRegion = '<option value="sin-region">Seleccione región</option><option value="sin-region">--</option>';
-	var htmlComunas = '<option value="sin-region">Seleccione comuna</option><option value="sin-region">--</option>';
-
-	jQuery.each(RegionesYcomunas.regiones, function () {
-		htmlRegion = htmlRegion + '<option value="' + RegionesYcomunas.regiones[iRegion].NombreRegion + '">' + RegionesYcomunas.regiones[iRegion].NombreRegion + '</option>';
-		iRegion++;
-	});
-
-	jQuery('#regiones2').html(htmlRegion);
-	jQuery('#comunas2').html(htmlComunas);
-
-	jQuery('#regiones2').change(function () {
-		var iRegiones = 0;
-		var valorRegion = jQuery(this).val();
-		var htmlComuna = '<option value="sin-comuna">Seleccione comuna</option><option value="sin-comuna">--</option>';
-		jQuery.each(RegionesYcomunas.regiones, function () {
-			if (RegionesYcomunas.regiones[iRegiones].NombreRegion == valorRegion) {
-				var iComunas = 0;
-				jQuery.each(RegionesYcomunas.regiones[iRegiones].comunas, function () {
-					htmlComuna = htmlComuna + '<option value="' + RegionesYcomunas.regiones[iRegiones].comunas[iComunas] + '">' + RegionesYcomunas.regiones[iRegiones].comunas[iComunas] + '</option>';
-					iComunas++;
-				});
-			}
-			iRegiones++;
-		});
-		jQuery('#comunas2').html(htmlComuna);
-	});
-	jQuery('#comunas2').change(function () {
-		if (jQuery(this).val() == 'sin-region') {
-			alert('selecciones Región');
-		} else if (jQuery(this).val() == 'sin-comuna') {
-			alert('selecciones Comuna');
-		}
-	});
-	jQuery('#regiones2').change(function () {
+	jQuery('#regiones1').change(function () {
 		if (jQuery(this).val() == 'sin-region') {
 			alert('selecciones Región');
 		}
@@ -215,11 +217,11 @@ function validarRyC(){
           }
         
         if(validatorR1 == false){
-            alert(region + ': Region de origen invalida' );
+            alert(region + ': Region disponible invalida' );
             return false;
         }
         if(validatorC1 == false){
-            alert(comuna + ': No coincide con region de origen ' + region);
+            alert(comuna + ': No coincide con region Disponible ' + region);
             return false;
         }
         
@@ -244,6 +246,27 @@ function validarRyC2(){
         if(!auxValidarRyC(regs[i], coms[i])){
             return false
         }
+    }
+    return true;
+}
+
+function act(){
+    regs = [];
+    coms = [];
+    for(i = 1; i<=5; i++){
+        try{
+            document.getElementById("regiones" + i).value;
+            document.getElementById("comunas" + i).value;
+
+            regs.push("regiones" + i);
+            coms.push("comunas" + i);
+        }
+        catch(error){
+            break;
+        }
+    }
+    for(i = 0; i < regs.length; i++){
+        init(regs[i], coms[i]);
     }
     return true;
 }

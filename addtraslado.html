@@ -5,75 +5,74 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Añadir Traslado | Tarea 1</title>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
     <script src="js/regiones.js"></script>
     <script src="js/val-traslados.js"></script>
     <script src="js/script-aaddt.js"></script>
 
-    <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
-    <link rel="stylesheet" href="css/addt-styles.css">
-    <link rel="stylesheet" href="css/banner-styles.css">
+    <link type="text/css" href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="css/addt-styles.css">
+    <link type="text/css" rel="stylesheet" href="css/banner-styles.css">
     
     
     
 </head>
 <body>
     <div class="container">
-        <section class="banner">
-            <header>
+        <div class="banner">
                 <div class="content">
                     <div class="barra">
                         <div class="logo-banner">
                             <a href="index.html">
-                                    <img class="logo" src="img/banner-real.png"alt="banner">
+                                    <img class="logo" src="img/banner-real.png" alt="banner">
                             </a>
                         </div>
                         <div class="option-banner">
-                            <button class="nav-button"> <img class="menu-icon"src="img/menu.png" alt="menu-icon"></button>
+                            <button class="nav-button"> <img  class="menu-icon" src="img/menu.png" alt="menu-icon"></button>
                             <a href="addtraslado.html"  class="nav-enlace desaparece">Agregar Traslado</a>
-                            <a href="#"  class="nav-enlace desaparece">Agregar Voluntarios </a>
-                            <a href="#"  class="nav-enlace desaparece">Ver Traslados  </a>
-                            <a href="#"  class="nav-enlace desaparece">VerVoluntarios  </a>
+                            <a href="addvoluntario.html"  class="nav-enlace desaparece">Agregar Voluntarios </a>
+                            <a href="vertraslados.html"  class="nav-enlace desaparece">Ver Traslados  </a>
+                            <a href="vervoluntarios.html"  class="nav-enlace desaparece">Ver Voluntarios  </a>
                         </div>
                     </div>
                 
                 </div>
-            </header>
-        </section>
-        <section class="main">
+    
+            </div>
+        <div class="main">
             <h1>Agregar traslado</h1>
             <div class="caja">
-                <form method="post" onsubmit="return validarRyC() && validacion()">
+                <form method="post" action="php/addt.php" onsubmit="return validarRyC() && validacion()" enctype="multipart/form-data">
                     <table>
                         <tbody>
                             <tr>
                                 <th>Region de origen</th>
                             </tr>
                             <tr>
-                                <td><select id="regiones"></select></td>
+                                <td><select name="region-origen" id="regiones"></select></td>
                             </tr>
                             <tr>
                                 <th>Comuna de origen</th>
                             </tr>
                             <tr>
-                                <td><select id="comunas"></select></td>
+                                <td><select name="comuna-origen" id="comunas"></select></td>
                             </tr>
                             <tr><th>Region de Destino</th></tr>
-                            <tr> <td><select id="regiones2"></select></tr>
+                            <tr> <td><select name="region-destino" id="regiones2"></select></tr>
                             <tr><th>Comuna destino</th></tr>
-                            <tr><td><select id="comunas2"></select></td></tr>
+                            <tr><td><select name="comuna-destino" id="comunas2"></select></td></tr>
                             <tr><th>Fecha de viaje</th></tr>
-                            <tr><td><input type="date" name="fecha-viaje" id="fecha-viaje"></td></tr>
+                            <tr><td><input type="date" name="fecha-viaje" id="fecha-viaje"> <small>aaaa-mm-dd</small></td></tr>
                             <tr><th>Escpacio necesario</th></tr>
-                            <tr><td><select name="espacio-necesario" id="esp-necesario" onchange="mostrar(this, 'mas', 'input-mascota')">
+                            <tr><td><select name="espacio-necesario" id="esp-necesario" onchange="mostrar(this, 'mas', 'input-espacio')">
                                 <option value="30x30x30">30x30x30</option>
                                 <option value="50x50x50">50x50x50</option>
                                 <option value="100x100x100">100x100x100</option>
                                 <option value="mas">mas</option>
-                                <input type="text" size="15" id="input-mascota">
-                            </select></td></tr>
+                                
+                            </select><input type="text" size="15" name="opcion-mas" id="input-espacio"></td></tr>
                             <tr><th>Tipo de mascota</th></tr>
-                            <tr><td><select name="ti -po-mascota" id="tipo-mascota" onchange="mostrar(this, 'otro', 'input-otro')">
+                            <tr><td><select name="Tipo-mascota" id="tipo-mascota" onchange="mostrar(this, 'otro', 'input-otro')">
                                 <option value="gato">gato</option>
                                 <option value="perro">perro</option>
                                 <option value="conejo">conejo</option>
@@ -83,11 +82,10 @@
                             </select>
                             <input type="text" size="15" id="input-otro">
                             </td> </tr>
-                            <tr><th>Foto mascota</th></tr>
+                            <tr><th>Foto mascota <small>(.jpg, .jpeg, .png, .gif)</small> </th></tr>
                             <tr><td>
                                 <div id="files">
-                                    <input type="file" name="1" value="1" accept="Image/*" oninput="annadirInputFile()"
-                                    on>
+                                    <input type="file" accept="Image/*" onchange="validarImagen(this) , annadirInputFile()">
                                 </div>  
                           </td></tr>
                             
@@ -96,17 +94,17 @@
                             <tr><td><textarea name="descripcion-mascota" id="descripcion" rows="8" cols="40" maxlength="500"> </textarea></td></tr>
 
                             <tr><th>Nombre contacto</th></tr>
-                            <tr><td><input type="text" maxlength="80" size="30" name="nombre"></td></tr>
+                            <tr><td><input type="text" maxlength="80" size="30" name="nombre" id="nombre"></td></tr>
                             <tr><th>Email contacto</th></tr>
                             <tr><td><input type="email" name="email" id="email"></td></tr>
                             <tr><th>Número celular contacto</th></tr>
-                            <tr><td><input type="number" name="celular" id="celular"></td></tr>
-                            <tr><td><input type="submit"></td></tr>
+                            <tr><td><input type="number" name="celular" id="celular"> Ej: 912345678</td></tr>
+                            <tr><td><input type="submit" name="boton-submit"> </td> </tr>
                         </tbody>
                     </table>
                 </form>
             </div>
-        </section>
+        </div>
     </div>
 </body>
 </html>
