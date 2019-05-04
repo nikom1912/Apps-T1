@@ -1,14 +1,3 @@
-function validacion(){
-    return validarFecha("fecha-viaje") &&
-    validarEspacio("esp-necesario", "input-espacio") &&
-    validarMascota("tipo-mascota") &&
-    validarImagenes() &&
-    validarDescripcion("descripcion") &&
-    validarNombre("nombre") &&
-    validarCorreo("email") &&
-    validarCelular("celular");
-    
-}
 function validarEspacio(id, id2){
     val = document.getElementById(id).value;
     if(val == "mas"){
@@ -48,20 +37,20 @@ function validarFecha(id){
         alert(id + ' invalida')
         return false;
     }
-    f = new Date();
-    if(parseInt(anno, 10) < f.getFullYear()){
-        alert('La ' + id + ' debe ser posterior a la fecha actual.');
-        return false;
+    // f = new Date();
+    // if(parseInt(anno, 10) < f.getFullYear()){
+    //     alert('La ' + id + ' debe ser posterior a la fecha actual.');
+    //     return false;
 
-    }
-    else if( parseInt(mes) < f.getMonth() + 1){
-        alert('La ' + id + ' debe ser posterior a la fecha actual.');
-        return false;
-    }
-    else if(parseInt(dia) < f.getDate()){
-        alert('La ' + id + ' debe ser posterior a la fecha actual.');
-        return false;
-    }
+    // }
+    // else if( parseInt(mes) < f.getMonth() + 1){
+    //     alert('La ' + id + ' debe ser posterior a la fecha actual.');
+    //     return false;
+    // }
+    // else if(parseInt(dia) < f.getDate()){
+    //     alert('La ' + id + ' debe ser posterior a la fecha actual.');
+    //     return false;
+    // }
     return true;
 }
 
@@ -149,4 +138,17 @@ function validarImagen(obj){
         return false;
     }
     return true;
+}
+
+
+function validacion(){
+    return validarFecha("fecha-viaje") &&
+    validarEspacio("esp-necesario", "input-espacio") &&
+    validarMascota("tipo-mascota") &&
+    validarImagenes() &&
+    validarDescripcion("descripcion") &&
+    validarNombre("nombre") &&
+    validarCorreo("email") &&
+    validarCelular("celular");
+    
 }

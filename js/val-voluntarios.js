@@ -1,17 +1,6 @@
-function validacion(){
-   
-    return  validarNombre("nombre") &&
-    validarCorreo("email") &&
-    validarCelular("celular") &&
-    validarEspacio("esp-necesario", "input-espacio") &&
-    validarDescripcion("descripcion");
-    
-}
-
 function validarEspacio(id, id2){
     val = document.getElementById(id).value;
     if(val == "mas"){
-        console.log("holiaaaaaaaaaa")
         val = document.getElementById(id2).value;
     }
     arrVal = val.split("x");
@@ -26,11 +15,12 @@ function validarEspacio(id, id2){
         alert(id + ' invalido (formato intxintxint ej.: 100x100x100)');
         return false;
     }
+}
 
 function validarNombre(id){
     valor = document.getElementById(id).value;
     if(valor.length < 3 || valor.length > 80 ){
-        alert('Nombre de contacto invalido')
+        alert('Nombre de contacto invalido');
         return false;
     }
     return true; 
@@ -38,7 +28,7 @@ function validarNombre(id){
 function validarDescripcion(id){
     valor= document.getElementById(id).value;
     if(valor.length > 500){
-        alert('Descripcion de Mascota demasiado larga')
+        alert('Descripcion de Mascota demasiado larga');
         return false;
     }
     return true;
@@ -56,9 +46,18 @@ function validarCorreo(id){
 function validarCelular(id){
     valor = document.getElementById(id).value;
     if(valor > 999999999 || valor < 900000000){
-        alert('Celular invalido')
+        alert('Celular invalido');
         return false;
     }
     return true;
 }
 
+function validacion(){
+   
+    return  validarNombre("nombre") &&
+    validarCorreo("email") &&
+    validarCelular("celular") &&
+    validarEspacio("esp-necesario", "input-espacio") &&
+    validarDescripcion("descripcion");
+    
+}

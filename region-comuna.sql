@@ -4,7 +4,7 @@ INSERT INTO region (id, nombre) VALUES (2,'Región de Antofagasta');
 INSERT INTO region (id, nombre) VALUES (3,'Región de Atacama');
 INSERT INTO region (id, nombre) VALUES (4,'Región de Coquimbo ');
 INSERT INTO region (id, nombre) VALUES (5,'Región de Valparaíso');
-INSERT INTO region (id, nombre) VALUES (6,'Región del Libertador Bernardo Ohiggins');
+INSERT INTO region (id, nombre) VALUES (6,"Región del Libertador Bernardo O'higgins");
 INSERT INTO region (id, nombre) VALUES (7,'Región del Maule');
 INSERT INTO region (id, nombre) VALUES (8,'Región del Bío-Bío');
 INSERT INTO region (id, nombre) VALUES (9,'Región de la Araucanía');
