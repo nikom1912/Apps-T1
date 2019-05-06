@@ -10,9 +10,12 @@
     <script src="js/val-traslados.js"></script>
     <script src="js/script-aaddt.js"></script>
 
-    <link type="text/css" href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
     <link type="text/css" rel="stylesheet" href="css/addt-styles.css">
     <link type="text/css" rel="stylesheet" href="css/banner-styles.css">
+
+    <link type="text/css" href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+    <link rel="stylesheet" href="css/boostrap v4 w3c fix.css">
+    
     
     
     
@@ -31,8 +34,8 @@
                             <button class="nav-button"> <img  class="menu-icon" src="img/menu.png" alt="menu-icon"></button>
                             <a href="addtraslado.html"  class="nav-enlace desaparece">Agregar Traslado</a>
                             <a href="addvoluntario.html"  class="nav-enlace desaparece">Agregar Voluntarios </a>
-                            <a href="vertraslados.html"  class="nav-enlace desaparece">Ver Traslados  </a>
-                            <a href="vervoluntarios.html"  class="nav-enlace desaparece">Ver Voluntarios  </a>
+                            <a href="vertraslados.php"  class="nav-enlace desaparece">Ver Traslados  </a>
+                            <a href="vervoluntarios.php"  class="nav-enlace desaparece">Ver Voluntarios  </a>
                         </div>
                     </div>
                 
@@ -85,7 +88,7 @@
                             <tr><th>Foto mascota <small>(.jpg, .jpeg, .png, .gif)</small> </th></tr>
                             <tr><td>
                                 <div id="files">
-                                    <input type="file" accept="Image/*" onchange="validarImagen(this) , annadirInputFile()">
+                                    <input type="file" accept="Image/*" onchange="validarImagen(this) , annadirInputFile()" name="Foto-mascota">
                                 </div>  
                           </td></tr>
                             

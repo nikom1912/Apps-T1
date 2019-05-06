@@ -28,7 +28,7 @@ function validarNombre(id){
 function validarDescripcion(id){
     valor= document.getElementById(id).value;
     if(valor.length > 500){
-        alert('Descripcion de Mascota demasiado larga');
+        alert('Descripcion demasiado larga');
         return false;
     }
     return true;
@@ -53,7 +53,6 @@ function validarCelular(id){
 }
 
 function validacion(){
-   
     return  validarNombre("nombre") &&
     validarCorreo("email") &&
     validarCelular("celular") &&

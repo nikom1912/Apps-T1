@@ -3,8 +3,14 @@ body{
 }
 .main h1{
     font-family: "Lobster",  cursive;
-    font-size:  150px;
+    font-size:  60px;
     margin: 30px 40px;
     color: brown;
     text-align: center;
+}
+#map{
+    margin-right:auto;
+    margin-left: auto;
+    height: 80vh;
+    width: 100vh;
 }

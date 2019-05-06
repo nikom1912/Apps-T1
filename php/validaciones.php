@@ -8,14 +8,14 @@ function validarComuna($name, $regionName, $bdd, $tipo){
         $region_value = $_GET[$regionName];
     }
     else{
-        echo '<script language="javascript">'."alert('Error en Region $tipo');"."</script>";
+        echo "<script>"."alert('Error en Region $tipo');"."</script>";
         return false;
     }
     
-    $region_result = $bdd->query("SELECT id FROM region WHERE nombre = '$region_value'");
+    $region_result = $bdd->query("SELECT id FROM region WHERE id = '$region_value'");
     $region_dbval = $region_result->fetch_assoc()['id'];
     if($region_dbval == ""){
-        echo '<script language="javascript">'." alert('Region ". $tipo ." inválida');"."</script>";
+        echo "<script>"." alert('Region $tipo inválida');"."</script>";
         return false;
     }
 
@@ -26,19 +26,18 @@ function validarComuna($name, $regionName, $bdd, $tipo){
         $com_value = $_GET[$name];
     }
     else{
-        echo '<script language="javascript">'."alert('Error en Comuna $tipo');"."</script>";
+        echo '<script>'."alert('Error en Comuna $tipo');"."</script>";
         return false;
     }
 
-    $com_result = $bdd->query("SELECT comuna.id FROM comuna WHERE region_id = id AND comuna.nombre = '$name'");
+    $com_result = $bdd->query("SELECT comuna.id FROM comuna WHERE region_id = '$region_dbval' AND comuna.id = '$com_value'");
     $com_dbval = $com_result->fetch_assoc()['id'];
     if($com_dbval == ""){
-        echo '<script language="javascript">'."alert('Comuna'"."$tipo "."'inválida');"."</script>";
+        echo '<script>'."alert('Comuna $tipo inválida');"."</script>";
         return false;
     }
     return $com_dbval;
 }
-
 Function validarFecha($fecha_name){
     if(isset($_POST[$fecha_name])){
         $value = $_POST[$fecha_name]; 
@@ -47,17 +46,17 @@ Function validarFecha($fecha_name){
         $value = $_GET[$fecha_name];
     }
     else{
-        echo '<script language="javascript">'."alert('Error en fecha de viaje');"."</script>";
+        echo '<script>'."alert('Error en fecha de viaje');"."</script>";
         return false;
     }
     if($value < date('y-m-d')){
-        echo '<script language="javascript">'."alert('Fecha de viaje debe ser posterior a la fecha actual');"."</script>";
+        echo '<script>'."alert('Fecha de viaje debe ser posterior a la fecha actual');"."</script>";
         return false;
     }
     return $value;
 }
 
-function validarEspacio($esp_name, $bdd){
+function validarEspacio($esp_name){
     if(isset($_POST[$esp_name])){
         $value = $_POST[$esp_name]; 
         if($value == 'mas'){
@@ -71,23 +70,38 @@ function validarEspacio($esp_name, $bdd){
         }
     }
     else{
-        echo '<script language="javascript">'."alert('Error en espacio necesario');"."</script>";
+        echo '<script>'."alert('Error en espacio necesario');"."</script>";
         return false;
     }
 
     
     $arr_esp = explode("x", $value);
     if(sizeof($arr_esp) != 3){
-        echo '<script language="javascript">'."alert('Espacio necesario inválido');"."</script>";
+        echo '<script>'."alert('Espacio necesario inválido');"."</script>";
         return false;
     }
     for($i = 0; $i < 3; $i++){
         if(!is_numeric($arr_esp[$i]) && ((int) $arr_esp[$i]) > 0 ){
-            echo '<script language="javascript">'."alert('Espacio necesario inválido');"."</script>";
+            echo '<script>'."alert('Espacio necesario inválido');"."</script>";
             return false;
         }
     }
+    return $value;
 
+    // $esp_query = "SELECT id FROM espacio WHERE valor = '$value'";
+    // $dbesp = $bdd->query($esp_query);
+    // $id = $dbesp->fetch_assoc()['id'];
+    // if($id == ""){
+    //     $max_id_query = $bdd->query("SELECT MAX(id) as id FROM espacio");
+    //     $max_id = $max_id_query->fetch_assoc()['id'];
+    //     $max_id++;
+    //     $id = $max_id;
+    //     $bdd->query("INSERT INTO espacio (id, valor) VALUES ('$max_id', '$value')");
+    // }
+    // return $id;
+}
+
+function masEsp($value, $bdd){
     $esp_query = "SELECT id FROM espacio WHERE valor = '$value'";
     $dbesp = $bdd->query($esp_query);
     $id = $dbesp->fetch_assoc()['id'];
@@ -101,29 +115,49 @@ function validarEspacio($esp_name, $bdd){
     return $id;
 }
 
-function validarTipo($type_name, $bdd){
+function validarTipo($type_name){
     if(isset($_POST[$type_name])){
-        $value = $_POST;
+        $value = $_POST[$type_name];
     }
     else if(isset($_GET[$type_name])){
         $value = $_GET[$type_name];
     }
     else{
-        echo '<script language="javascript">'."alert('Error en tipo mascota');"."</script>";
+        echo '<script>'."alert('Error en tipo mascota');"."</script>";
         return false;
     }
-    if($value = ""){
-        echo '<script language="javascript">'."alert('Tipo mascota inválido');"."</script>";
+    if($value == ""){
+        echo '<script>'."alert('Tipo mascota inválido');"."</script>";
         return false;
     }
+
+    
+    return $value;
+    // $type_result = $bdd->query("SELECT id FROM tipo_mascota WHERE descripcion = '$value'");
+
+    // $type_id = $type_result->fetch_assoc()['id'];
+    // if($type_id == ""){
+    //     $max_tipo_id_query = $bdd->query("SELECT MAX(id) as id FROM tipo_mascota");
+    //     $max_tipo_id = $max_tipo_id_query->fetch_assoc()['id'];
+    //     $max_tipo_id++;
+    //     $type_id = $max_tipo_id;
+    //     $bdd->query("INSERT INTO tipo_mascota (descripcion) VALUES ('$value')");
+    // }
+    // return $type_id;
+}
+
+function otraMascota($value,$bdd){
     $type_result = $bdd->query("SELECT id FROM tipo_mascota WHERE descripcion = '$value'");
+
     $type_id = $type_result->fetch_assoc()['id'];
     if($type_id == ""){
-        $max_tipo_id_query = $bdd->query("SELECT MAX(id) as id FROM tipo_mascota");
-        $max_tipo_id = $max_tipo_id_query->fetch_assoc()['id'];
-        $max_tipo_id++;
-        $type_id = $max_tipo_id;
-        $bdd->query("INSERT INTO tipo_mascota (id, descripcion) VALUES ('$max_tipo_id', '$value')");
+        // $max_tipo_id_query = $bdd->query("SELECT MAX(id) as id FROM tipo_mascota");
+        // $max_tipo_id = $max_tipo_id_query->fetch_assoc()['id'];
+        // $max_tipo_id++;
+        // $type_id = $max_tipo_id;
+        $bdd->query("INSERT INTO tipo_mascota (descripcion) VALUES ('$value')");
+        $aux = $bdd->query("SELECT id FROM tipo_mascota WHERE descripcion = '$value'");
+        $type_id = $aux->fetch_assoc()['id'];
     }
     return $type_id;
 }
@@ -136,16 +170,16 @@ function validarDescripcion($des_name){
         $value = $_GET[$des_name];
     }
     else{
-        echo '<script language="javascript">'."alert('Error en Descripcion mascota');"."</script>";
+        echo '<script>'."alert('Error en Descripcion mascota');"."</script>";
         return false;
     }
 
     if(strlen($value) > 500){
-        echo '<script language="javascript">'."alert('Descripcion de mascota demasiado larga (Max. 500 caracteres)');"."</script>";
+        echo '<script>'."alert('Descripcion de mascota demasiado larga (Max. 500 caracteres)');"."</script>";
         return false;
     }
     if($value == ""){
-        echo '<script language="javascript">'."alert('Descripcion de mascota inválida');"."</script>";
+        echo '<script>'."alert('Descripcion de mascota inválida');"."</script>";
         return false;
     }
     return $value;
@@ -159,15 +193,15 @@ function validarNombre($name){
         $value = $_GET[$name];
     }
     else{
-        echo '<script language="javascript">'."alert('Error en Nombre contacto');"."</script>";
+        echo '<script>'."alert('Error en Nombre contacto');"."</script>";
         return false;
     }
     if(strlen($value) > 500){
-        echo '<script language="javascript">'."alert('Nombre contacto demasiado larga (Máx. 80 caracteres)');"."</script>";
+        echo '<script>'."alert('Nombre contacto demasiado larga (Máx. 80 caracteres)');"."</script>";
         return false;
     }
     if(strlen($value) < 3){
-        echo '<script language="javascript">'."alert('Nombre contacto demasiado corto (Min. 3 caracteres)');"."</script>";
+        echo '<script>'."alert('Nombre contacto demasiado corto (Min. 3 caracteres)');"."</script>";
         return false;
     }
     return $value;
@@ -180,12 +214,12 @@ function validarEmail($email_name){
         $value = $_GET[$email_name];
     }
     else{
-        echo '<script language="javascript">'."alert('Error en Email contacto');"."</script>";
+        echo '<script>'."alert('Error en Email contacto');"."</script>";
         return false;
     }
     $correoRegex = '/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i';
     if(!preg_match($correoRegex, $value)){
-        echo '<script language="javascript">'."alert('Email contacto inválido');"."</script>";
+        echo '<script>'."alert('Email contacto inválido');"."</script>";
         return false;
     }
     return $value;
@@ -198,14 +232,53 @@ function validarNumero($num_name){
         $value = $_GET[$num_name];
     }
     else{
-        echo '<script language="javascript">'."alert('Error en Número contacto');"."</script>";
+        echo '<script>'."alert('Error en Número contacto');"."</script>";
         return false;
     }
     $numeReg = '/^[9][0-9]{8}$/';
     if(!preg_match($numeReg, $value)){
-        echo '<script language="javascript">'."alert('Número contacto inválido');"."</script>";
+        echo '<script>'."alert('Número contacto inválido');"."</script>";
         return false;
     }
     return $value; 
 }
+function validarImg($name, $i){
+    if(!empty($_FILES[$name]['name'])){
+        $nombre = $_FILES[$name]['name'];
+        $tipo = $_FILES[$name]['type'];
+    }
+    else{
+        if($i > 1){
+            return false;
+        }
+        echo '<script>'."alert('Error imagen de Mascota $i');"."</script>";
+        return false;
+    }
+    
+    if($tipo != "image/jpg" and $tipo != "image/jpeg" and $tipo !="image/png" and $tipo != "image/gif" ){
+        if($i > 1){
+            // echo '<script>'."alert('Extension invalida imagen de mascota $i, se ignorara este archivo');"."</script>";
+            return false;
+        }
+        echo '<script>'."alert('Extension invalida imagen de mascota $i');"."</script>";
+        return false;
+    }
+    return $nombre;
+}
+
+function subirImg($name, $i){
+    $nombre = $_FILES[$name]['name'];
+    if(move_uploaded_file($_FILES[$name]['tmp_name'], "../traslados/img/$nombre")){
+        return $nombre;
+    }
+    else{
+        if($i > 1){
+            // echo '<script>'."alert('Error al subir imagen de mascota $i, se ignorara este archivo');"."</script>";
+            return false;
+        }
+        echo '<script>'."alert('Error al subir imagen de Mascota $i');"."</script>";
+        return false;
+    }
+}
+
 ?>

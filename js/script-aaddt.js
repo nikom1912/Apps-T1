@@ -26,22 +26,23 @@ function annadirInputFile(){
 function annadirComuna(){
     val = document.getElementsByClassName("c")[0];
     aux = document.getElementsByClassName("comuna");
-    a = [];
+    al = [];
     for(i = 0; i < aux.length; i++){
-        a.push(aux[i].getElementsByTagName("input")[0]);
+        al.push(aux[i].getElementsByTagName("input")[0]);
     }
     console.log(i);
-    if(a.length < 4){
+    if(al.length < 4){
         i = i + 2;
         selectC = document.createElement("select");
         selectC.setAttribute("id", "comunas" + i);
-        selectC.setAttribute("name", "comuna-disponible");
+        selectC.setAttribute("name", "comuna-disponible" + i);
         selectR = document.createElement("select");
         selectR.setAttribute("id", "regiones" + i);
-        selectR.setAttribute("name", "region-disponible");
+        selectR.setAttribute("name", "region-disponible" + i);
+        selectR.setAttribute("onChange", "actualizar('regiones"+i+ "', 'comunas" + i +"')");
         trR = document.createElement("tr");
         thTR =  document.createElement("th");
-        thTR.appendChild(document.createTextNode("Region disponible"));
+        thTR.appendChild(document.createTextNode("Region disponible " + i));
         trR.appendChild(thTR);
         val.appendChild(trR);
         trR2 = document.createElement("tr");
@@ -55,7 +56,7 @@ function annadirComuna(){
         val.appendChild(trR2);
         trC = document.createElement("tr");
         thTC =  document.createElement("th");
-        thTC.appendChild(document.createTextNode("Comuna disponible"));
+        thTC.appendChild(document.createTextNode("Comuna disponible " + i));
         trC.appendChild(thTC);
         val.appendChild(trC);
         trC2 = document.createElement("tr");

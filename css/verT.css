@@ -16,12 +16,15 @@ table{
 
 .a:hover{
     cursor: pointer;
-    background: chocolate;
+    background: rgb(204, 116, 53);
 }
 .a:active{
-    background: seagreen;
+    background: rgb(50, 184, 108);
 }
 
-.a1{
-    display: none;
+.sin-borde-r{
+    border-right: 0px;
+}
+.sin-borde-l{
+    border-left: 0px;
 }

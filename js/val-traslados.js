@@ -37,6 +37,7 @@ function validarFecha(id){
         alert(id + ' invalida')
         return false;
     }
+
     // f = new Date();
     // if(parseInt(anno, 10) < f.getFullYear()){
     //     alert('La ' + id + ' debe ser posterior a la fecha actual.');
