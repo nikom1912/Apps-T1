@@ -19,6 +19,7 @@ function annadirInputFile(){
         nodo.setAttribute("type", "file");
         nodo.setAttribute("accept", "Image/*");
         nodo.setAttribute("onchange", "validarImagen(this) && annadirInputFile()");
+        nodo.setAttribute("name", "Foto-mascota" + (valo.length + 1));
         document.getElementById("files").appendChild(nodo);
     }
 }

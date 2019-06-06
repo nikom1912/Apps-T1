@@ -9,7 +9,8 @@ function validarVoluntario(){
     // }
     
     if(isset($_POST['boton-submit']) or isset($_GET['boton-submit'])){
-        $mysql = new mysqli("localhost", 'cc500221_u', 'nissimnullaD','cc500221_db');
+        // $mysql = new mysqli("localhost", 'cc500221_u', 'nissimnullaD','cc500221_db');
+        $mysql = new mysqli("localhost", 'root', '','tarea2');
         if ($mysql->connect_error) {
             die("Connection failed: " . $mysql->connect_error);
         } 
@@ -74,7 +75,7 @@ if(validarVoluntario()){
     echo "alert('Ingreso de datos exitoso')";
     echo "</script>";
     echo "<script>";
-    echo "window.location = '../index.html';";
+    echo "window.location = '../index.php';";
     echo "</script>";
 }
 else{

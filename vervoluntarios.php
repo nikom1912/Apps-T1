@@ -1,5 +1,6 @@
 <?php
-    $mysql = new mysqli("localhost", 'cc500221_u', 'nissimnullaD','cc500221_db');
+    // $mysql = new mysqli("localhost", 'cc500221_u', 'nissimnullaD','cc500221_db');
+    $mysql = new mysqli("localhost", 'root', '','tarea2');
 
     $infoXpagina = 5;
     $contar = $mysql->query("SELECT count(*) AS cuenta FROM voluntario");
@@ -37,7 +38,7 @@
                 <div class="content">
                     <div class="barra">
                         <div class="logo-banner">
-                            <a href="index.html">
+                            <a href="index.php">
                                     <img class="logo" src="img/banner-real.png" alt="banner">
                             </a>
                         </div>
@@ -63,10 +64,18 @@
             $queryPage = "SELECT voluntario.id AS id, nombre_voluntario AS nombre, email_voluntario AS email,
                             celular_voluntario AS celular ,region.nombre AS region, comuna.nombre AS comuna, espacio.valor AS espacio, descripcion FROM voluntario, espacio, comuna, region WHERE 
                             espacio_disponible = espacio.id AND comuna_disponible = comuna.id AND comuna.region_id = region.id ORDER BY voluntario.id DESC LIMIT $init , $infoXpagina";
-            
-            $result = $mysql->query($queryPage);
+            $result = $mysql->query($queryPage);  
+
             ?>
             <div class="caja">
+            <div> Buscar voluntario: <div><input type="text" name="buscar" id="search" length="50" placeholder="Buscar..." onkeyup="sendRequest()"> </div>
+                <div> 
+                    <ul id="busqueda_resultado">
+
+                    </ul>
+                    
+                </div>
+            </div>
                 <table>
                     <thead>
                         <tr>
@@ -153,6 +162,36 @@
             </div>
             </div>
         </div>
+        <script> 
+            function sendRequest(){
+                var val = document.getElementById("search").value;
+                if(val.length >= 3){
+                    var url = 'php/volrequest.php';
+                    
+                    // var request = new XMLHttpRequest();
+                    // request.open('POST', 'php/volrequest.php', true);
+                    // request.setRequestHeader('Content-Type', 'application/x-ww-form-urlencoded');
+                    // request.onreadystatechange = function () {
+                        
+                    // }
+                    // request.send();
+                    $.ajax({
+
+                        type: "GET",
+                        url: url,
+                        data: {buscar: val},
+
+                    })
+                    .done(function(resultado){
+                        $('#busqueda_resultado').html(resultado);
+                    })
+                }
+                else{
+                    document.getElementById("busqueda_resultado").innerHTML = "";
+                }
+            }
+
+        </script>
     </body>
 </html>
         

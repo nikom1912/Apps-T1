@@ -1,5 +1,6 @@
 <?php
-    $mysql = new mysqli("localhost", 'cc500221_u', 'nissimnullaD','cc500221_db');
+    // $mysql = new mysqli("localhost", 'cc500221_u', 'nissimnullaD','cc500221_db');
+    $mysql = new mysqli("localhost", 'root', '','tarea2');
 
     $infoXpagina = 5;
     $contar = $mysql->query("SELECT count(*) AS cuenta FROM traslado");
@@ -12,7 +13,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Añadir Traslado | Tarea 1</title>
+    <title>Ver traslados | Tarea 1</title>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
     <script src="js/regiones.js"></script>
     <script src="js/script-vert.js"></script>
@@ -36,7 +37,7 @@
                 <div class="content">
                     <div class="barra">
                         <div class="logo-banner">
-                            <a href="index.html">
+                            <a href="index.php">
                                     <img class="logo" src="img/banner-real.png" alt="banner">
                             </a>
                         </div>
@@ -59,13 +60,14 @@
                 header('Location:vertraslados.php?pagina=1');
             }
             $init = ($_GET['pagina'] - 1)*$infoXpagina;
-            $query = "SELECT traslado.id, c.nombre AS origen, co.nombre AS destino, r.nombre AS r_origen, ro.nombre AS r_destino, fecha_viaje AS fecha, e.valor AS espacio, m.descripcion AS tipo,traslado.descripcion AS descripcion, email_contacto AS 
+            $query = "SELECT traslado.id, c.nombre AS origen, co.nombre AS destino, r.nombre AS r_origen, ro.nombre AS r_destino, fecha_viaje AS fecha, e.valor AS espacio, m.descripcion AS tipo, traslado.descripcion AS descripcion, email_contacto AS 
                                     email, nombre_contacto AS nombre, celular_contacto AS celular FROM traslado, comuna c, comuna co, region r, region ro,  tipo_mascota m, espacio e WHERE comuna_origen = c.id AND comuna_destino = co.id
                                     AND r.id = c.region_id AND ro.id = co.region_id AND tipo_mascota_id = m.id AND espacio = e.id ORDER BY traslado.id DESC LIMIT $init , $infoXpagina";
             
             $result = $mysql->query($query);
             ?>
             <div class="caja">
+            
                 <table>
                     <thead>
                         <tr>
@@ -112,7 +114,6 @@
                             <td><?php echo $datos['espacio'] ?></td>
                             <td><?php echo $datos['tipo'] ?></td>
                             <td><?php echo $datos['email'] ?></td>
-                            
                         </tr>
                         <tr>
                             <?php
@@ -170,6 +171,7 @@
             </div>
             </div>
         </div>
+        
     </body>
 </html>
         

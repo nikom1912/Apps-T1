@@ -2,19 +2,19 @@
 function validarTraslados(){
     include('validaciones.php');
     mb_internal_encoding('UTF-8');
-    // if ($_POST) {
-    //     echo '<pre>';
-    //     echo htmlspecialchars(print_r($_POST, true));
-    //     echo '</pre>';
-    // }
-    // if($_FILES){
-    //     echo '<pre>';
-    //     echo htmlspecialchars(print_r($_FILES, true));
-    //     echo '</pre>';
-    // }
-    // return true;
+    if ($_POST) {
+        echo '<pre>';
+        echo htmlspecialchars(print_r($_POST, true));
+        echo '</pre>';
+    }
+    if($_FILES){
+        echo '<pre>';
+        echo htmlspecialchars(print_r($_FILES, true));
+        echo '</pre>';
+    }
     if(isset($_POST['boton-submit'])){
-        $mysql = new mysqli("localhost", 'cc500221_u', 'nissimnullaD','cc500221_db');
+        // $mysql = new mysqli("localhost", 'cc500221_u', 'nissimnullaD','cc500221_db');
+        $mysql = new mysqli("localhost", 'root', '','tarea2');
         if ($mysql->connect_error) {
             die("Connection failed: " . $mysql->connect_error);
         } 
@@ -50,7 +50,8 @@ function validarTraslados(){
         $email = validarEmail('email');
         $celular = validarNumero('celular');
         $img = validarImg('Foto-mascota', 1);
-        if(!subirImg('Foto-mascota', 1)){
+        $img2 = subirImg('Foto-mascota', 1);
+        if(!$img2){
             return false;
         }
 
@@ -68,32 +69,38 @@ function validarTraslados(){
                         ('$comunaOrigen', '$comunaDestino', '$fecha', '$espacio', '$tipo', '$descripcion', 
                         '$nombre', '$email', '$celular');";
 
-        if($mysql->query($insert) === TRUE){
-
-            
+        if($mysql->query($insert) === TRUE){            
             $ida = $mysql->query("SELECT MAX(id) AS id FROM traslado");
             $id = $ida->fetch_assoc()['id'];
             $insert2 = "INSERT INTO foto_mascota (ruta_archivo, nombre_archivo, traslado_id)
-                            VALUES ('traslados/img', '$img', '$id');";
-            $insert3 = "";               
-            for($i = 2; $i <= 5; $i++){
-                if(validarImg("Foto_mascota$i", $i)){
-                    $img = subirImg("Foto-mascota$i", $i);
-                    $insert3 = $insert3 +  "INSERT INTO foto_mascota (ruta_archivo, nombre_archivo, traslado_id)
-                                        VALUES ('../traslados/img', '$img', '$id';);  ";
-                }
-                else{
-                    continue;
-                }
-            }
+                            VALUES ('traslados/img', '$img2', '$id');";
+            
 
             // $insert = "INSERT INTO traslado (comuna_origen, comuna_destino, fecha_viaje, espacio, tipo_mascota_id,
             //     descripcion, nombre_contacto, email_contacto, celular_contacto) VALUES 
             //     ('$comunaOrigen', '$comunaDestino', '$fecha', '$espacio', '$tipo', '$descripcion', 
             //     '$nombre', '$email', '$celular')";
-            if($mysql->query($insert2) === TRUE ){
+            if($mysql->query($insert2) === TRUE ){            
+                for($i = 2; $i <= 5; $i++){
+                    if(validarImg("Foto-mascota", $i)){
+                        echo "holiaaaa";
+                        $img = subirImg("Foto-mascota", $i);
+                        $insert_otro = "INSERT INTO foto_mascota (ruta_archivo, nombre_archivo, traslado_id)
+                                            VALUES ('traslados/img', '$img', '$id');";
+                        $mysql->query($insert_otro);
+                    }
+                    else{
+                        continue;
+                    }
+                }
+                
                 $mysql->close();
                 return TRUE;
+            }
+            else{
+                echo "Error: ". $insert . "<br>". $mysql->error;
+                $mysql->close();
+                return FALSE;
             }
         }
         
@@ -113,16 +120,16 @@ function validarTraslados(){
     // }
 }
 if(validarTraslados()){
-    echo "<script>";
-    echo "alert('Ingreso de datos exitoso')";
-    echo "</script>";
-    echo "<script>";
-    echo "window.location = '../index.html';";
-    echo "</script>";
+    // echo "<script>";
+    // echo "alert('Ingreso de datos exitoso')";
+    // echo "</script>";
+    // echo "<script>";
+    // echo "window.location = '../index.php';";
+    // echo "</script>";
 }
 else{
-    echo "<script type='text/javascript'>";
-    echo "window.history.back(-1)";
-    echo "</script>";
+    // echo "<script type='text/javascript'>";
+    // echo "window.history.back(-1)";
+    // echo "</script>";
 }
 ?>

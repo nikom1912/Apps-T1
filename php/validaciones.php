@@ -243,15 +243,15 @@ function validarNumero($num_name){
     return $value; 
 }
 function validarImg($name, $i){
-    if(!empty($_FILES[$name]['name'])){
-        $nombre = $_FILES[$name]['name'];
-        $tipo = $_FILES[$name]['type'];
+    if(!empty($_FILES[$name.$i]['name'])){
+        $nombre = $_FILES[$name . $i]['name'];
+        $tipo = $_FILES[$name . $i]['type'];
     }
     else{
         if($i > 1){
             return false;
         }
-        echo '<script>'."alert('Error imagen de Mascota $i');"."</script>";
+        // echo '<script>'."alert('Error imagen de Mascota $i');"."</script>";
         return false;
     }
     
@@ -267,9 +267,11 @@ function validarImg($name, $i){
 }
 
 function subirImg($name, $i){
-    $nombre = $_FILES[$name]['name'];
-    if(move_uploaded_file($_FILES[$name]['tmp_name'], "../traslados/img/$nombre")){
-        return $nombre;
+    $nombre =$_FILES[$name . $i]['name'];
+    $type = explode("/", $_FILES[$name . $i]['type'])[1];
+    $nombre_guardar = uniqid();
+    if(move_uploaded_file($_FILES[$name . $i]['tmp_name'], "../traslados/img/$nombre_guardar".".".$type)){
+        return $nombre_guardar.".".$type;
     }
     else{
         if($i > 1){
